@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.directive 自定义指令</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<div v-lidonghui="color">{{num}}</div>
+		<button @click="add">ADD</button>
+	</div>
+</body>
+<script>
+	Vue.directive('lidonghui', function(el,binding){
+		console.log(el);
+	})
+
+	var vm = new Vue({
+		el: '#root',
+		data: {
+			num: 10,
+			color: 'blue',
+		},
+		methods: {
+			add(){
+				this.num++;
+			}
+		}
+	})
+</script>
+
+</html>
