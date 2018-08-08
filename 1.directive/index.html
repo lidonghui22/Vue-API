@@ -9,12 +9,41 @@
 	<div id="root">
 		<div v-lidonghui="color">{{num}}</div>
 		<button @click="add">ADD</button>
+
+		<button onclick="unbind()">解绑</button>
 	</div>
 </body>
 <script>
-	Vue.directive('lidonghui', function(el,binding){
-		console.log(el);
-	})
+	//自定义指令的使用
+	// Vue.directive('lidonghui', function(el, binding){
+	// 	console.log(el);
+	// 	console.log(binding);
+	// 	el.style = "color:"+binding.value;
+	// });
+
+	//自定义指令的5个生命周期钩子函数
+    Vue.directive('lidonghui', {
+        bind:function(){//被绑定
+            console.log('1 - bind');
+        },
+        inserted:function(){//绑定到节点
+            console.log('2 - inserted');
+        },
+        update:function(){//组件更新
+            console.log('3 - update');
+        },
+        componentUpdated:function(){//组件更新完成
+            console.log('4 - componentUpdated');
+        },
+        unbind:function(){//解绑
+            console.log('5 - bind');
+        }
+	});
+
+    //原生函数进行解绑
+    function unbind(){
+        vm.$destroy();
+    }
 
 	var vm = new Vue({
 		el: '#root',
