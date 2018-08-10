@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 生命周期</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="root">
+        <div>{{count}}</div>
+        <div>
+            <button @click="add">add</button>
+        </div>
+	</div>
+    <br>
+    <button onclick="vm.$destroy()">销毁</button>
+</body>
+<script>
+	var vm = new Vue({
+		el: '#root',
+		data: {
+		    count: 0
+        },
+        methods:{
+		    add(){
+		        this.count++;
+            }
+        },
+        beforeCreate: function () {
+            console.log("beforeCreate");
+        },
+        created: function () {
+            console.log("created");
+        },
+        beforeMount: function () {
+            console.log("beforeMount");
+        },
+        mounted: function () {
+            console.log("mounted");
+        },
+        beforeUpdate: function () {
+            console.log("beforeUpdate");
+        },
+        updated: function () {
+            console.log("updated");
+        },
+        beforeDestroy: function () {
+            console.log("beforeDestroy");
+        },
+        destroyed: function () {
+            console.log("destroyed");
+        }
+    })
+</script>
+
+</html>
