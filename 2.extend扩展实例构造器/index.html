@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.extend扩展实例构造器</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="author"></div>
+	<div class="author"></div>
+    <author></author>
+</body>
+<script>
+	var authorExtend = Vue.extend({
+		template:"<p><a :href='authorUrl'>{{authorName}}</a></p>",
+		data: function(){
+		    return {
+		        authorName: 'lidonghui',
+				authorUrl: 'https://github.com/lidonghui22'
+			}
+		}
+	});
+
+    //这里跟jquery绑定类似，id用'#'，class用'.'，元素直接写元素名
+	new authorExtend().$mount('#author');
+    new authorExtend().$mount('.author');
+    new authorExtend().$mount('author')
+
+</script>
+
+</html>
