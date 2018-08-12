@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue watch监听</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<p>今日温度：{{temperature}}℃</p>
+		<p>穿衣建议：{{clothes}}</p>
+		<p>
+			<button @click="add">温度+</button>
+			<button @click="reduce">温度-</button>
+		</p>
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el: '#root',
+		data: {
+            temperature: 14,
+			clothesArr: ['T恤短袖','夹克长裙','棉衣羽绒服'],
+            clothes: 'T恤短袖'
+		},
+		watch:{
+            temperature(newVal, oldVal){
+                if(newVal >= 26){
+                    this.clothes = this.clothesArr[0]
+				}else if(newVal < 26 && newVal > 0){
+                    this.clothes = this.clothesArr[1]
+				}else{
+                    this.clothes = this.clothesArr[2]
+				}
+            }
+		},
+		methods: {
+            add(){
+                this.temperature += 5;
+			},
+            reduce(){
+                this.temperature -= 5;
+			}
+		}
+	})
+</script>
+
+</html>
