@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue mixins混入</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<div>{{num}}</div>
+		<p><button @click="add">add</button></p>
+	</div>
+</body>
+<script>
+	var addConsole = {
+	    updated(){
+	        console.log('数据发生变化，变成了'+ this.num);
+		}
+	};
+
+	//全局的mixin
+	//注意V大写，mixin不用s
+	Vue.mixin({
+		updated(){
+		    console.log("全局的mixin执行");
+		}
+	});
+
+    var vm = new Vue({
+        el: '#root',
+        data: {
+            num: 1
+        },
+		mixins: [addConsole],
+        methods: {
+            add(){
+                this.num += 1;
+            }
+        },
+		updated(){
+            console.log("原生的upload比mixins中的upload后执行");
+		}
+    })
+</script>
+
+</html>
