@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue extends扩展</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<div>{{num}}</div>
+		<p><button @click="add">add</button></p>
+	</div>
+</body>
+<script>
+	var extendsObj = {
+	    updated(){
+	        console.log("我是扩展的updated");
+		}
+	};
+
+    var vm = new Vue({
+        el: '#root',
+        data: {
+            num: 1
+        },
+        methods: {
+            add(){
+                console.log("我是原生的方法");
+                this.num += 1;
+            }
+        },
+		updated(){
+            console.log("我是原生的updated");
+		},
+		extends: extendsObj
+    })
+</script>
+
+</html>
