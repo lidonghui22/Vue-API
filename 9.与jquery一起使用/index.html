@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.extend扩展实例构造器</title>
+	<script src="../vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+	<div id="root">
+		{{ message }}
+	</div>
+</body>
+<script>
+	var vm = new Vue({
+		el: '#root',
+		data: {
+			message: '我是vue'
+		},
+        //必须在mounted或者updated中才能使用jquery
+		mounted(){
+		    $("#root").html("我是jquery");
+		},
+        methods:{
+		    add(){
+                console.log("调用了构造器内部的add方法");
+            }
+        }
+	});
+
+	//在外部调用构造器内部方法
+    vm.add();
+</script>
+
+</html>
