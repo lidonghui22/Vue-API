@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.实例方法</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<p><button onclick="destroy()">销毁</button></p>
+	<p><button onclick="reload()">刷新</button></p>
+	<p><button onclick="tick()">nextTick</button></p>
+</body>
+<script>
+	var authorExtend = Vue.extend({
+		template:"<p>{{ message }}</p>",
+		data: function(){
+		    return {
+                message: 'hello, I am lidonghui'
+			}
+		},
+		mounted(){
+            console.log("mounted 被创建");
+        },
+		destroyed(){
+            console.log("destroy 被销毁");
+        },
+		updated(){
+            console.log("updated 被更新");
+        }
+	});
+
+	//挂载
+	var vm = new authorExtend().$mount('#root');
+
+	//销毁
+	function destroy(){
+	    vm.$destroy();
+	}
+
+	//更新
+	function reload(){
+	    vm.$forceUpdate();
+	}
+	
+	//数据修改
+	function tick(){
+	    vm.message ="update message info";
+	    vm.$nextTick(function(){
+	        console.log('message更新后我被调用了');
+		})
+	}
+
+</script>
+
+</html>
