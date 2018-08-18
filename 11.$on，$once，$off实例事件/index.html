@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue 实例事件</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<div>{{num}}</div>
+		<p><button @click="add">add</button></p>
+	</div>
+	<p><button onclick="reduce()">reduce</button></p>
+	<p><button onclick="once()">once</button></p>
+	<p><button onclick="off()">off</button></p>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#root',
+        data: {
+            num: 1
+        },
+        methods: {
+            add(){
+                console.log("执行了add方法");
+                this.num += 1;
+            }
+        }
+    });
+
+    //可以直接使用this
+	vm.$on('reduce', function(){
+        console.log("执行了reduce方法");
+        this.num--;
+	});
+
+	vm.$once('once', function(){
+        console.log("只执行一次的方法");
+        this.num = 10;
+    });
+
+	//调用构造器里面的reduce方法
+	function reduce(){
+	    vm.$emit('reduce');
+	}
+
+	//调用构造器里面的once方法
+	function once(){
+	    vm.$emit('once');
+	}
+
+	//关闭事件
+    function off(){
+        console.log("关闭了reduce事件");
+        vm.$off('reduce');
+    }
+
+</script>
+
+</html>
