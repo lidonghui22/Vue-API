@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue slot</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<lidonghui>
+			<span slot="url">{{ lidonghuiData.bolgUrl }}</span>
+			<span slot="name">{{ lidonghuiData.netName }}</span>
+			<span slot="skill">{{ lidonghuiData.skill }}</span>
+		</lidonghui>
+	</div>
+
+	<template id="tep">
+		<div>
+			<p>博客地址: <slot name="url"></slot></p>
+			<p>网名: <slot name="name"></slot></p>
+			<p>技术类型: <slot name="skill"></slot></p>
+		</div>
+	</template>
+
+</body>
+<script>
+	var lidonghui = {
+	    template: '#tep'
+	};
+
+	var vm = new Vue({
+		el: '#root',
+		data: {
+			lidonghuiData:{
+			    bolgUrl: 'https://github.com/lidonghui22',
+				netName: 'lidonghui',
+				skill: 'web前端'
+			}
+		},
+		components:{
+		    'lidonghui' : lidonghui
+		}
+	})
+</script>
+
+</html>
